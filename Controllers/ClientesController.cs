@@ -19,8 +19,14 @@ namespace Loja.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            var clientes = from c in _context.Cliente select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                clientes = clientes.Where(c => c.Nome.Contains(searchString));
+            }
             return View(await _context.Cliente.ToListAsync());
         }
 
