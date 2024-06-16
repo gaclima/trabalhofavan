@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loja.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Loja.Controllers
 {
@@ -19,7 +19,7 @@ namespace Loja.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, int? clienteId)
         {
             var clientes = from c in _context.Cliente select c;
 
@@ -27,7 +27,15 @@ namespace Loja.Controllers
             {
                 clientes = clientes.Where(c => c.Nome.Contains(searchString));
             }
-            return View(await _context.Cliente.ToListAsync());
+
+            if (clienteId.HasValue)
+            {
+                clientes = clientes.Where(c => c.ClienteId == clienteId);
+            }
+
+            ViewBag.ClienteId = new SelectList(await _context.Cliente.ToListAsync(), "ClienteId", "Nome", clienteId);
+
+            return View(await clientes.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -55,8 +63,6 @@ namespace Loja.Controllers
         }
 
         // POST: Clientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ClienteId,Nome")] Cliente cliente)
@@ -87,8 +93,6 @@ namespace Loja.Controllers
         }
 
         // POST: Clientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome")] Cliente cliente)

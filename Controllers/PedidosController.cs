@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -47,13 +45,11 @@ namespace Loja.Controllers
         // GET: Pedidos/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "ClienteId");
+            LoadClientes();
             return View();
         }
 
         // POST: Pedidos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PedidoId,Descricao,ClienteId")] Pedido pedido)
@@ -64,7 +60,7 @@ namespace Loja.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "ClienteId", pedido.ClienteId);
+            LoadClientes(pedido.ClienteId);
             return View(pedido);
         }
 
@@ -81,13 +77,11 @@ namespace Loja.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "ClienteId", pedido.ClienteId);
+            LoadClientes(pedido.ClienteId);
             return View(pedido);
         }
 
         // POST: Pedidos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PedidoId,Descricao,ClienteId")] Pedido pedido)
@@ -117,7 +111,7 @@ namespace Loja.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "ClienteId", pedido.ClienteId);
+            LoadClientes(pedido.ClienteId);
             return View(pedido);
         }
 
@@ -158,6 +152,12 @@ namespace Loja.Controllers
         private bool PedidoExists(int id)
         {
             return _context.Pedido.Any(e => e.PedidoId == id);
+        }
+
+        private void LoadClientes(int? selectedClienteId = null)
+        {
+            var clientes = _context.Cliente.Select(c => new { c.ClienteId, c.Nome }).ToList();
+            ViewBag.ClienteId = new SelectList(clientes, "ClienteId", "Nome", selectedClienteId);
         }
     }
 }
