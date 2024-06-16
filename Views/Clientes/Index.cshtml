@@ -1,47 +1,57 @@
 @model IEnumerable<Loja.Models.Cliente>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Clientes";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">Clientes</h1>
 
+<br>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Cadastrar cliente</a>
 </p>
-<form asp-controller="Clientes" asp-action="Index">
-    <p>
-        Nome:<input type="text" name="searchString"/>
-        <input type="submit" value="Filtrar"/>
+
+<br>
+<form asp-controller="Clientes" asp-action="Index" method="get">
+    <p class="fw-bold">
+        Cliente: <select name="clienteId" class="form-control d-inline-block w-auto" asp-items="ViewBag.ClienteId">
+            <option value="">Todos</option>
+        </select>
+        <input type="submit" value="Filtrar" class="btn btn-success" />
+        <a href="/Clientes" class="btn btn-light">Limpar</a>
     </p>
 </form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClienteId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ClienteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClienteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClienteId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<br>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.First().ClienteId)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.First().Nome)
+                </th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.ClienteId)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.ClienteId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ClienteId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ClienteId">Deletar</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
