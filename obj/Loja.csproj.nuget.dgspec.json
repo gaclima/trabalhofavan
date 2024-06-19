@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Loja\\Loja.csproj": {}
+    "C:\\Users\\faela\\Desktop\\Projetos\\trabalho-arq-soft\\trabalhofavan\\Loja.csproj": {}
   },
   "projects": {
-    "C:\\Loja\\Loja.csproj": {
+    "C:\\Users\\faela\\Desktop\\Projetos\\trabalho-arq-soft\\trabalhofavan\\Loja.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Loja\\Loja.csproj",
+        "projectUniqueName": "C:\\Users\\faela\\Desktop\\Projetos\\trabalho-arq-soft\\trabalhofavan\\Loja.csproj",
         "projectName": "Loja",
-        "projectPath": "C:\\Loja\\Loja.csproj",
-        "packagesPath": "C:\\Users\\colop\\.nuget\\packages\\",
-        "outputPath": "C:\\Loja\\obj\\",
+        "projectPath": "C:\\Users\\faela\\Desktop\\Projetos\\trabalho-arq-soft\\trabalhofavan\\Loja.csproj",
+        "packagesPath": "C:\\Users\\faela\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\faela\\Desktop\\Projetos\\trabalho-arq-soft\\trabalhofavan\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\colop\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\faela\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -49,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.6, )"
@@ -76,6 +74,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -97,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
